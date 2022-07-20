@@ -1,6 +1,7 @@
 import os
 import sys
 import subprocess
+import platform
 from urllib.request import urlopen
 from urllib.error import URLError
 
@@ -56,8 +57,8 @@ def access_pypi():
     [
         None,
         pytest.param('pip<20', marks=pytest.mark.xfail(reason='pypa/pip#6599')),
-        'pip<20.1',
-        'pip<21',
+        pytest.param('pip<20.1', marks=pytest.mark.skipif(platform.machine() == 'ARM64', reason='no t64-arm.exe')),
+        pytest.param('pip<21', marks=pytest.mark.skipif(platform.machine() == 'ARM64', reason='no t64-arm.exe')),
         'pip<22',
         pytest.param(
             'https://github.com/pypa/pip/archive/main.zip',
