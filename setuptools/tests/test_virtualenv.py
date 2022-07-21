@@ -59,7 +59,8 @@ def access_pypi():
         pytest.param('pip<20', marks=pytest.mark.xfail(reason='pypa/pip#6599')),
         pytest.param('pip<20.1', marks=pytest.mark.skipif(platform.machine() == 'ARM64', reason='no t64-arm.exe')),
         pytest.param('pip<21', marks=pytest.mark.skipif(platform.machine() == 'ARM64', reason='no t64-arm.exe')),
-        'pip<22',
+        pytest.param('pip<22', marks=pytest.mark.skipif(platform.machine() == 'ARM64', reason='no t64-arm.exe')),
+        pytest.param('pip', marks=pytest.mark.skipif(platform.machine() != 'ARM64', reason='')),
         pytest.param(
             'https://github.com/pypa/pip/archive/main.zip',
             marks=pytest.mark.xfail(reason='#2975'),
