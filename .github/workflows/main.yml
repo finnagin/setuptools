@@ -64,6 +64,9 @@ jobs:
         - platform: ubuntu-latest
           python: "3.10"
           distutils: stdlib
+        exclude:
+        - python: "3.9"
+          platform: windows-11-arm
     runs-on: ${{ matrix.platform }}
     continue-on-error: ${{ matrix.python == '3.14' || matrix.python == 'pypy3.10' }}
     # XXX: pypy seems to be flaky with unrelated tests in #6345
